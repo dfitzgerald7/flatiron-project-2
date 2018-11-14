@@ -1,0 +1,12 @@
+
+<h1> <%= @team.name %> </h1>
+
+<% @team.players.each do |player|  %>
+  <p> <%= player.name %> </p>
+<% end %>
+
+
+<form action="/teams/<%= @team.id %>/delete" method="post">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <input type="submit" id="Delete Team">
+</form>

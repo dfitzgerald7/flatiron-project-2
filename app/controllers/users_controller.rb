@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
   get "/signup" do
     #user is not logged in
-    unless Helper.logged_in(session)
+    unless logged_in
       erb :"/users/signup"
     else
       redirect "/" #check this route later
@@ -25,18 +25,29 @@ class UsersController < ApplicationController
   end
 
   get "/login" do
-    unless Helper.logged_in(session)
+    unless logged_in
       erb :"/users/login"
     else
       redirect "/"
+    end
   end
 
   post "/login" do
-
+    user = User.find_by_username(params[:username])
+    if user && user.authenticate(params[:password])
+      session[:user_id] = user.id
+      redirect "/teams"
+    else
+      #error message
+      redirect "/login"
+    end
   end
 
-  get "logout" do
-
+  get "/logout" do
+    if logged_in
+      session.clear
+    end
+      redirect "/"
   end
 
 end
