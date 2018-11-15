@@ -6,6 +6,7 @@ end
 
 use Rack::Flash
 use Rack::MethodOverride
+use PlayersController
 use TeamsController
 use UsersController
 run ApplicationController

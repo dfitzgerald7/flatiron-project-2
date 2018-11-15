@@ -38,7 +38,6 @@ class UsersController < ApplicationController
       redirect "/teams"
     else
       flash.now[:notice] = "That account does not exist."
-      binding.pry
       redirect "/login"
     end
   end

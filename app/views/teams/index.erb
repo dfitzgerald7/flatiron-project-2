@@ -3,7 +3,7 @@
 <h2> Here are your favorite teams </h2>
 
 <% @teams.each do |team| %>
-  <a href="/teams/<%=team.id%>" > <%= team.name %> </a>
+  <a href="/players/<%=team.id%>" > <%= team.name %> </a>
 <% end %>
 
 <a href="/teams/new" > Click here to add a team. </a>
