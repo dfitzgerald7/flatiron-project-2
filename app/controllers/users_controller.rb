@@ -16,7 +16,6 @@ class UsersController < ApplicationController
     if user.save
     #if the user saves,
       session["user_id"] = user.id
-      binding.pry
       redirect "/teams"
     else
       #diplsay error message
