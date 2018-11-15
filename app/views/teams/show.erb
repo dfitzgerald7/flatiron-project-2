@@ -1,12 +1,13 @@
 
-<h1> Players on <%=@team.name%> </h1> 
+<h1> Players on <%=@team.name%> </h1>
 <% @team.players.each do |player|  %>
   <p> <%= player.name %> </p>
 <% end %>
 
 <form method="post" action="/teams/<%=@team.id%>/player">
-  <label for="name"> Input New Player Name </label>
-  <input type="text" name="player" id="name" placeholder="Input New Player">
+  <label for="name"> Input New Player Name and Position </label>
+  <input type="text" name="player[name]" id="name" placeholder="Name">
+  <input type="text" name="player[position]" id="name" placeholder="Position">
   <input type="submit" id="Add Player">
 </form>
 

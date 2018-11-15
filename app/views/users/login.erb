@@ -1,5 +1,13 @@
+
+<%binding.pry%>
+<% if flash[:notice] %>
+    <h3><%= flash[:notice] %></h3>
+<% end %>
+
 <h1> Welcome Back </h1>
 <h2> Please input your username and password </h2>
+
+
 
 <form method="post" action="/login">
   <input type="text" name="username" placeholder="Username">

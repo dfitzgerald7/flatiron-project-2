@@ -6,7 +6,7 @@ class TeamsController < ApplicationController
       @teams = @user.teams
       erb :"/teams/index"
     else
-
+      redirect "/"
     end
   end
 
@@ -24,7 +24,7 @@ class TeamsController < ApplicationController
     redirect "/teams"
   end
 
-  get "/teams/:id" do
+  get "/players/:team_id" do
     @team = Team.find_by_id(params[:id])
     if @team.users.include?(current_user)
       erb :"/teams/show"
@@ -37,7 +37,7 @@ class TeamsController < ApplicationController
   patch "/teams/:id" do  ##edit players on team
     @team = Team.find_by_id(params[:id])
     if @team
-      
+
     else
 
     end
@@ -46,7 +46,7 @@ class TeamsController < ApplicationController
   post "/teams/:id/player" do
     @team = Team.find_by_id(params[:id])
     if @team.users.include?(current_user)
-      @player = @team.players.build(name: params[:player])
+      @player = @team.players.build(params[:player])
       @player.save
     else
       #error message
