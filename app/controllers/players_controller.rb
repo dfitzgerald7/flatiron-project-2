@@ -25,11 +25,12 @@ class PlayersController < ApplicationController
 
   patch "/players/:team_id" do  ##Vote on a player
     @team = Team.find_by_id(params[:team_id])
-    if @team.users.include?(current_user) & player = @team.players.find_by_name(params[:player][:name].strip)
+    binding.pry
+    if @team.users.include?(current_user) && player = @team.players.find_by_name(params[:player][:name].strip)
       player.update(votes: player.votes+=1)
       player.save
     else
-      #error message
+      flash[:message] = "You must wait a day between votes."
     end
     redirect "/players/#{@team.id}"
   end

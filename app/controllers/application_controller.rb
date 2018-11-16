@@ -26,4 +26,10 @@ class ApplicationController < Sinatra::Base
 
   end
 
+  get "/leaderboard" do
+    @players = Player.all
+    erb :leaderboard
+  end
+
+
 end

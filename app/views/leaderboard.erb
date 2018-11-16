@@ -1,0 +1,5 @@
+<h1> Voting Leaderboard </h1>
+
+<% @players.sort_by{|p| -p.votes}.each do |player|%>
+  <p> <%= player.votes %>. <%= player.name %> , <%= player.team.name %> </p>
+<%end%>

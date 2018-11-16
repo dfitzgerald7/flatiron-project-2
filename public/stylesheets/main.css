@@ -81,9 +81,11 @@
     margin-top: 20px;
     padding-top: 20px;
   }
+
 }
 
 @media screen and (max-width: 600px) {
+
   .wrapper {
     -moz-box-shadow: none;
     -webkit-box-shadow: none;
@@ -112,12 +114,13 @@
     font-size: 18px;
     line-height: 24px;
   }
+}
 
-  .navbar {
-    text-align: right;
-  }
+.navbar {
+  text-align: right;
+}
 
-  a {
-    text-decoration: none;
-  }
+a:link {
+  text-decoration: none;
+  margin-left :10px
 }
