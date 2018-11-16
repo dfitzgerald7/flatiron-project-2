@@ -1,17 +1,18 @@
 
 <h1> Welcome <%= @user.username %> </h1>
-<h2> Here are your favorite teams </h2>
-
+<h2> Here are your favorite teams:  <a href="/teams/new" > Click here to add a team. </a></h2>
+<% unless @user.teams == [] %>
+  <h3> Click on a team to see its players. </h3>
+<%end%>
 <% @teams.each do |team| %>
   <a href="/players/<%=team.id%>" > <%= team.name %> </a>
+  <br>
 <% end %>
 
-<a href="/teams/new" > Click here to add a team. </a>
-
-
-
-<form action="/teams/delete" method="post">
-  <input id="hidden" type="hidden" name="_method" value="delete">
-  <input type="text" name="team_name" placeholder="Team to be deleted">
-  <input type="submit" id="Delete Team">
-</form>
+<% unless @user.teams == [] %>
+  <form action="/teams/delete" method="post">
+    <input id="hidden" type="hidden" name="_method" value="delete">
+    <input type="text" name="team_name" placeholder="Team to be deleted">
+    <input type="submit" id="Delete Team">
+  </form>
+<%end%>

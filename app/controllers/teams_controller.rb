@@ -33,8 +33,7 @@ class TeamsController < ApplicationController
   delete "/teams/delete" do
     @team = Team.find_by_name(params[:team_name])
     if @team && @team.users.include?(current_user)
-      binding.pry
-      connection = UserTeam.find_by_team_id_and_user_id(@team.id,current_user.id) #How to make sure the right connection is found?
+      connection = UserTeam.find_by_team_id_and_user_id(@team.id,current_user.id) 
       connection.delete
     end
     redirect "/teams"
