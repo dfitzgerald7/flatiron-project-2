@@ -14,9 +14,12 @@
 ActiveRecord::Schema.define(version: 20181114194034) do
 
   create_table "players", force: :cascade do |t|
-    t.string  "name"
-    t.integer "votes"
-    t.integer "team_id"
+    t.string   "name"
+    t.integer  "votes"
+    t.integer  "team_id"
+    t.integer  "creator_user"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "teams", force: :cascade do |t|

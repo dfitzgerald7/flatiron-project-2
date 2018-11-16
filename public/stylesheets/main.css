@@ -112,4 +112,12 @@
     font-size: 18px;
     line-height: 24px;
   }
+
+  .navbar {
+    text-align: right;
+  }
+
+  a {
+    text-decoration: none;
+  }
 }

@@ -25,6 +25,12 @@
           <a href="/"> Home Page </a>
       </nav>
 
+      <% flash.keys.each do |type| %>
+      <% binding.pry %>
+        <div data-alert class="flash <%= type %> alert-box radius">
+          <%= flash[:message] %>
+        </div>
+      <% end %>
         <%= yield %>
 
       <footer class="branding">

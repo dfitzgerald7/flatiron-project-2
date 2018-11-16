@@ -1,7 +1,7 @@
 class Teams < ActiveRecord::Migration
   def change
     create_table :teams do |t|
-      t.string :name 
+      t.string :name
     end
   end
 end

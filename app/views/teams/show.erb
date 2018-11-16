@@ -1,5 +1,6 @@
 
 <h1> Players on <%=@team.name%> </h1>
+<h2> Vote for Your Favorite Players. Votes are Shown to All Users! </h2>
 
 <% @team.players.sort_by{|p| -p.votes}.each do |player|  %>
   <a> <%=player.votes%>. <%= player.name %> </a>

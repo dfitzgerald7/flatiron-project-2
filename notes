@@ -1,0 +1,9 @@
+Leader board page (votes, player, team)
+
+Cant delete a player that you didn't create
+
+Limit on votes (one a day) timestamps in db
+
+Make it prettier
+
+List of teams to choose from (checkbox)

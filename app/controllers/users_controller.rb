@@ -37,7 +37,7 @@ class UsersController < ApplicationController
       session[:user_id] = user.id
       redirect "/teams"
     else
-      flash.now[:notice] = "That account does not exist."
+      flash[:message] = "That account does not exist."
       redirect "/login"
     end
   end

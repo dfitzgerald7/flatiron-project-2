@@ -7,7 +7,8 @@ class ApplicationController < Sinatra::Base
     set :session_secret, "secret"
     set :public_folder, 'public'
     set :views, 'app/views'
-    use Rack::Flash#, :sweep => true
+    enable :sessions #flash messages
+    register Sinatra::Flash
   end
 
   get "/" do
