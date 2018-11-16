@@ -20,9 +20,11 @@ class TeamsController < ApplicationController
 
   post "/teams/new" do
     #if team already exists, add user to arr of teams
-    if Team.find_by_name(params[:name])
-      
-    team = Team.create(params)
+    if t = Team.find_by_name(params[:name])
+      team = t
+    else
+      team = Team.create(params)
+    end
     team.users << current_user
     redirect "/teams"
   end
@@ -31,7 +33,9 @@ class TeamsController < ApplicationController
   delete "/teams/delete" do
     @team = Team.find_by_name(params[:team_name])
     if @team && @team.users.include?(current_user)
-      UserTeam.find_by_team_id(@team.id).delete #How to make sure the right connection is found?
+      binding.pry
+      connection = UserTeam.find_by_team_id_and_user_id(@team.id,current_user.id) #How to make sure the right connection is found?
+      connection.delete
     end
     redirect "/teams"
   end

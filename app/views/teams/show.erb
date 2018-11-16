@@ -1,21 +1,19 @@
 
 <h1> Players on <%=@team.name%> </h1>
-<% @team.players.each do |player|  %>
-  <p><%=player.position%>. <%= player.name %> </p>
+<% @team.players.sort_by{|p| -p.votes}.each do |player|  %>
+  <p><%=player.votes%>. <%= player.name %> </p>
 
 <% end %>
 
 <form method="post" action="/players/<%=@team.id%>">
-  <label for="name"> Input New Player Name and Position </label>
+  <label for="name"> Input New Player Name </label>
   <input type="text" name="player[name]" id="name" placeholder="Name">
-  <input type="text" name="player[position]" id="name" placeholder="Position">
   <input type="submit" value="Add Player" id="Add Player">
 </form>
 
 <form action="/players/<%= @team.id %>" method="post">
   <input id="hidden" type="hidden" name="_method" value="patch">
-  <label for="name"> Edit Player </label>
+  <label for="name"> Vote For Your Favorite Players </label>
   <input type="text" name="player[name]" placeholder="Name" id="name">
-  <input type="text" name="player[position]" placeholder="Position" id="position">
-  <input type="submit" value="Edit" >
+  <input type="submit" value="Vote" >
 </form>

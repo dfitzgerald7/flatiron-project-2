@@ -15,7 +15,7 @@ class PlayersController < ApplicationController
     #a user can't access a team unless they declare it as a favorite
     @team = Team.find_by_id(params[:team_id])
     if @team.users.include?(current_user)
-      @player = @team.players.build(params[:player])
+      @player = @team.players.build(name: params[:player][:name], votes: 1)
       @player.save
     else
       #error message
@@ -23,11 +23,10 @@ class PlayersController < ApplicationController
     redirect "/players/#{@team.id}"
   end
 
-  patch "/players/:team_id" do  ##edit players on team
+  patch "/players/:team_id" do  ##Vote on a player
     @team = Team.find_by_id(params[:team_id])
-    if @team.users.include?(current_user)
-      player = @team.players.find_by_name(params[:player][:name])
-      player.update(params[:player])
+    if @team.users.include?(current_user) & player = @team.players.find_by_name(params[:player][:name])
+      player.update(votes: player.votes+=1)
       player.save
     else
       #error message
