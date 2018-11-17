@@ -6,14 +6,17 @@ class TeamsController < ApplicationController
       @teams = @user.teams
       erb :"/teams/index"
     else
+      flash[:message] = "You are not logged in."
       redirect "/"
     end
   end
 
   get "/teams/new" do
     if logged_in
+      @teams = Team.team_names
       erb :"/teams/new"
     else
+      flash[:message] = "You are not logged in."
       redirect "/"
     end
   end
@@ -33,7 +36,7 @@ class TeamsController < ApplicationController
   delete "/teams/delete" do
     @team = Team.find_by_name(params[:team_name])
     if @team && @team.users.include?(current_user)
-      connection = UserTeam.find_by_team_id_and_user_id(@team.id,current_user.id) 
+      connection = UserTeam.find_by_team_id_and_user_id(@team.id,current_user.id)
       connection.delete
     end
     redirect "/teams"

@@ -27,6 +27,7 @@ class UsersController < ApplicationController
     unless logged_in
       erb :"/users/login"
     else
+      flash{:message} = "You are already logged in."
       redirect "/"
     end
   end
@@ -46,6 +47,7 @@ class UsersController < ApplicationController
     if logged_in
       session.clear
     end
+      flash[:message] = "You are not logged in."
       redirect "/"
   end
 

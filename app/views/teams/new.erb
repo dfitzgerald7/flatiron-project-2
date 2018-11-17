@@ -1,6 +1,11 @@
 <h1> Input a new favorite team </h1>
 
-<form method="post" action="/teams/new">
-  <input type="text" name="name" placeholder="Input New Team">
+<form method="post" action="/teams/new" id="team_form">
+  <!-- <input type="text" name="name" placeholder="Input New Team"> -->
+  <select form="team_form" name="name">
+    <% @teams.each do |team|%>
+      <option value="<%=team%>"> <%=team%> </option>
+    <%end%>
+  </select>
   <input type="submit" id="Add Team">
 </form>

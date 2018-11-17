@@ -5,7 +5,7 @@ class PlayersController < ApplicationController
     if @team && @team.users.include?(current_user)
       erb :"/teams/show" #has form to delete and edit players
     else
-      #error message
+      flash[:message] = "You cannot view this team."
       redirect "/teams"
     end
   end
@@ -15,31 +15,33 @@ class PlayersController < ApplicationController
     #a user can't access a team unless they declare it as a favorite
     @team = Team.find_by_id(params[:team_id])
     if @team.users.include?(current_user)
-      @player = @team.players.build(name: params[:player][:name].strip, votes: 1)
+      @player = @team.players.build(name: params[:player][:name].strip, votes: 1, creator_user: current_user)
       @player.save
     else
-      #error message
+      flash[:message] = "You cannot see a team you have not declared as a favorite."
     end
     redirect "/players/#{@team.id}"
   end
 
   patch "/players/:team_id" do  ##Vote on a player
     @team = Team.find_by_id(params[:team_id])
-    binding.pry
-    if @team.users.include?(current_user) && player = @team.players.find_by_name(params[:player][:name].strip)
+    player = @team.players.find_by_name(params[:player][:name].strip)
+    if @team.users.include?(current_user) && player #&& (Time.now - player.updated_at) > 86400
       player.update(votes: player.votes+=1)
       player.save
     else
-      flash[:message] = "You must wait a day between votes."
+      flash[:message] = "You cannot vote for that player."
     end
     redirect "/players/#{@team.id}"
   end
 
   delete "/players/delete" do
     player = Player.find_by_name(params[:player][:name].strip)
-    if player && current_user.teams.include?(player.team)
+    if player && current_user.teams.include?(player.team) && player.creator_user == current_user
       player.destroy
       redirect "/players/#{player.team.id}"
+    else
+      flash[:message] = "You cannot delete a player you did not create."
     end
     redirect "/teams"
   end

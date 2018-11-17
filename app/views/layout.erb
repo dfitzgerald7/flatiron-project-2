@@ -27,9 +27,8 @@
       </nav>
 
       <% flash.keys.each do |type| %>
-      <% binding.pry %>
         <div data-alert class="flash <%= type %> alert-box radius">
-          <%= flash[:message] %>
+          <h2><%= flash[:message] %></h2>
         </div>
       <% end %>
         <%= yield %>

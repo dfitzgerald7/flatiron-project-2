@@ -16,4 +16,8 @@ class Team < ActiveRecord::Base
   has_many :players
   validates :name, presence: true, uniqueness: true
   validates_with TeamNameValidator
+
+  def self.team_names
+    TeamNameValidator::TEAM_ARR
+  end
 end
