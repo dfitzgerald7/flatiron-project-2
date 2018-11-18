@@ -15,7 +15,7 @@ class PlayersController < ApplicationController
     #a user can't access a team unless they declare it as a favorite
     @team = Team.find_by_id(params[:team_id])
     if @team.users.include?(current_user)
-      @player = @team.players.build(name: params[:player][:name].strip, votes: 1, creator_user: current_user)
+      @player = @team.players.build(name: params[:player][:name].strip, votes: 1, creator_user: current_user.id)
       @player.save
     else
       flash[:message] = "You cannot see a team you have not declared as a favorite."
@@ -37,7 +37,7 @@ class PlayersController < ApplicationController
 
   delete "/players/delete" do
     player = Player.find_by_name(params[:player][:name].strip)
-    if player && current_user.teams.include?(player.team) && player.creator_user == current_user
+    if player && current_user.teams.include?(player.team) && player.creator_user == current_user.id
       player.destroy
       redirect "/players/#{player.team.id}"
     else

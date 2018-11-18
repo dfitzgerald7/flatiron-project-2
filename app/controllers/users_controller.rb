@@ -5,7 +5,8 @@ class UsersController < ApplicationController
     unless logged_in
       erb :"/users/signup"
     else
-      redirect "/" #check this route later
+      flash[:message] = "You are already logged in."
+      redirect "/"
     end
   end
 
@@ -18,7 +19,7 @@ class UsersController < ApplicationController
       session["user_id"] = user.id
       redirect "/teams"
     else
-      #diplsay error message
+      flash[:message] = "Invalid Input. Please try again."
       redirect "/signup"
     end
   end
@@ -27,7 +28,7 @@ class UsersController < ApplicationController
     unless logged_in
       erb :"/users/login"
     else
-      flash{:message} = "You are already logged in."
+      flash[:message] = "You are already logged in."
       redirect "/"
     end
   end
